@@ -1,10 +1,20 @@
 <template>
 <section id ="app">
+<!---vimeo modal-->
+
+    <div id="modal" class="modal-video">
+        <div class="close"><a href="#close"><i class="material-icons tx">highlight_off</i></a></div>
+        <iframe class="iframe" src="https://player.vimeo.com/video/207691405" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen align="middle"></iframe>
+    </div>
 
     <!-- The input -->
-    <div class="query">
-        <div class="wrapper" v-if="micro == false">
-            <i class="material-icons iicon" @click="microphone(true)">mic</i>
+    <div id="wrapper-1">
+<div class="query">
+        <div id="img-avatar-container">
+            <img class="img-avatar"src="../img/avatar-ada.png" alt="ada imagen del asistente">
+        </div>
+        <div class="wrapper" id="entry-s" v-if="micro == false">
+            <i class="material-icons iicon" id="mic" @click="microphone(true)">mic</i>
             <input aria-label="Ask me something" autocomplete="off" v-model="query" class="queryform" @keyup.enter="submit()" placeholder="Ask me something..." autofocus type="text">
             <i class="material-icons iicon t2s" @click="mute(true)" v-if="muted == false">volume_up</i>
             <i class="material-icons iicon t2s" @click="mute(false)" v-else>volume_off</i>
@@ -13,8 +23,7 @@
             <i class="material-icons iicon recording" @click="microphone(false)">mic</i><input class="queryform" :placeholder="speech" readonly>   
         </div>
     </div>
-
-    <main class="wrapper ai-window">
+     <main class="wrapper ai-window">
 
         <br>
         <br>
@@ -47,12 +56,12 @@
         <table v-for="a in answers" class="chat-window">
 
             <!-- Your messages -->
-            <tr>
+            <tr id="your-m">
                 <td class="bubble">{{a.result.resolvedQuery}}</td>
             </tr>
 
             <!-- Dialogflow messages -->
-            <tr>
+            <tr id="bot-m">
                 <td>
 
                     <!-- Bot message types / Speech -->
@@ -77,7 +86,7 @@
                                 {{r.formattedText}}
                             </section>
                             <section class="mdc-card__actions" v-for="button in r.buttons">
-                                <a class="mdc-button mdc-button--compact mdc-button--primary mdc-card__action" target="_blank" :href="button.openUrlAction.url">{{button.title}} <i class="material-icons openlink">open_in_new</i></a>
+                                <a class="mdc-button mdc-button--compact mdc-button--primary mdc-card__action" id="enla" target="" :href="button.openUrlAction.url" >{{button.title}} <i class="material-icons openlink">open_in_new</i></a>
                             </section>
                         </div>
 
@@ -147,6 +156,14 @@
         <p class="copyright" v-if="answers.length > 0" id="bottom">Proudly powered by <a href="https://mish.io/Ushakov">Ushakov</a> & <a href="https://dialogflow.com">Dialogflow</a></p>
 
     </main>
+    </div>
+
+    
+    <section id="latera-informatin">
+            <div class="avatar-circle-content"><img src="../img/avatar-circle-ada.png" alt="" id="avatar-cirlce"></div>
+            <h1 class="color-text">Hola 👋</h1>
+            <p class="color-text">😄Soy Ada, un gusto conocerte estoy realmente feliz de ayudarte a conocer el Curso de yoga para principiantes</p>
+    </section>
 </section>
 </template>
 
@@ -162,6 +179,25 @@ body
     margin: 0
     background-color: #F5F5F5
     font-family: 'Roboto', sans-serif
+
+#app
+    display: flex
+
+#wrapper-1
+    width: 70%
+
+#latera-informatin
+    width: 30%
+    background: white
+    border-left: 1px solid #e1e1e1
+    height: 92vh
+    z-index: 9999
+    padding: 34px
+    position: fixed
+    right: 0
+
+.color-text
+    color: rgb(48, 48, 48)
 
 .wrapper
     max-width: 500px
@@ -185,22 +221,49 @@ body
     margin-top: 30%
 
 .query
-    padding: 25px 0px
-    background-color: red
+    padding: 5px 0px;
+    background-color: white
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
     z-index: 999
     position: fixed
-    width: 100%
+    width: 70%
+    display: flex;
+    flex-direction: row
+    padding-bottom: 0
+    bottom: 0
+
     
+.img-avatar
+    max-width: 172px;
+    margin-left: 1%;
+    width: 100%;
+    margin-bottom: -4px;
+    margin-top: -54px;
+
+#entry-s
+    display: flex
+    justify-content: space-between
+    align-items: center
+    max-width: 809px
+    width: 60%
+
+#img-avatar-container
+    margin:auto
+
+#mic
+    margin-left: 0
+    margin-right: 25px
 
 .queryform
-    border: 0
+    border: 1px solid #d4d9dd
     width: 100% - 20%
     margin-left: 60px
     font-size: 16px
     outline: none
     color: rgba(0,0,0,0.8)
-    font-weight: 500
+    font-weight: 50
+    padding: 15px
+
 
     @media screen and (max-width: 320px)
         width: 100% - 35%
@@ -218,6 +281,8 @@ body
 .iicon.t2s
     margin-left: 10px
     margin-right: 20px
+    position: relative
+    margin-left: 0
 
     @media screen and (max-width: 720px)
         right: 0
@@ -227,16 +292,38 @@ body
 
 .bubble
     max-width: 300px
-    background-color: #E1E1E1
+    background-color: #fff
     padding: 16px
-    border-radius: 8px
+    border-radius: 3px
     color: rgba(0,0,0,0.7)
     float: right
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12)
+    
+
+#your-m:before 
+    content: "Tú"
+    float: right
+    margin-left: -64px
+    margin-right: 7px
+    font-size: 14px
+    color: rgba(0, 0, 0, 0.43)
+    
+
+#bot-m
+    display: flex
+    &:before
+        content: "Ada"
+        font-size: 14px
+        height: 15px
+        float: left
+        color: rgba(0, 0, 0, 0.43)
 
 .bubble.bot
-    background-color: white
+    background-color: #a4addf
     float: left
     margin-right: 10px
+    margin-left: -34px
+    border: none
 
 td
     margin-top: 30px
@@ -292,10 +379,12 @@ td
     float: left
     margin-left: 10px
     padding: 10px
-    border: 2px rgba(0,0,0,0.5) solid
-    color: rgba(0,0,0,0.5)
-    border-radius: 6px
+    border: 1px rgb(48, 48, 48) solid
+    color: rgb(48, 48, 48)
+    border-radius: 100px
     cursor: pointer
+    min-width: 61px
+    text-align: center
 
 .suggestion:active
     border: 2px rgba(0,0,0,1) solid
@@ -325,7 +414,62 @@ td
 .copyright a:hover
     color: $color
     border-bottom: 2px solid $color
-    
+
+#bottom
+    min-height: 280px   
+
+
+#avatar-cirlce
+    width: 100%
+    max-width: 88px
+    display: block
+    margin: 25px auto
+
+.modal-video
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background: rgba(0,0,0,0.8)
+    z-index: 99999
+    opacity: 0
+    -webkit-transition: opacity 400ms ease-in
+    -moz-transition: opacity 400ms ease-in
+    transition: opacity 400ms ease-in
+    pointer-events: none
+    display: flex
+
+.modal-video:target
+    pointer-events: auto
+    opacity: 1
+
+.iframe
+    display: block
+    margin: auto
+
+.close
+    position: fixed
+    right: 44px
+    top: 33px
+    color: white
+
+.tx
+    font-size: 45px
+    color: white
+
+.mdc-card__title
+    font-size: 1.1rem
+    letter-spacing: 0
+    font-weight: 700
+    line-height: 1.5rem
+    color: #303030
+    -moz-osx-font-smoothing: grayscale
+    -webkit-font-smoothing: antialiased
+
+.mdc-card__subtitle
+    letter-spacing: 0;
 </style>
 
 <script>
@@ -337,13 +481,14 @@ export default {
     data: function(){
         return {
             answers: [],
-            query: '',
+            query: 'Iniciar',
             speech: 'Go ahead, im listening...',
             micro: false,
             muted: false,
-            online: navigator.onLine
+            online: navigator.onLine,
         }
     },
+
     methods: {
         submit(){
             client.textRequest(this.query).then((response) => {
@@ -352,16 +497,22 @@ export default {
 
                 this.query = ''
                 this.speech = 'Go ahead, im listening...' // <- reset query and speech
-
-                //window.scrollTo(0, document.body.scrollHeight) <- Uncomment this if you want autoscroll
+                
+                var b = document.body.scrollHeight;
+                var a = response.result;
+                window.scrollTo(0, b) //<- Uncomment this if you want autoscroll
+                console.log(a, b);
+                
             })
         },
+
         handle(response){
             if(response.result.fulfillment.speech || response.result.fulfillment.messages[0].type == 'simple_response' && this.muted == false){
                     let speech = new SpeechSynthesisUtterance(response.result.fulfillment.speech || response.result.fulfillment.messages[0].textToSpeech)
                     speech.voiceURI = 'native'
                     speech.lang = 'es-US' // <- Nice british accent
                     window.speechSynthesis.speak(speech) // <- Speech output
+
                 }
         },
         autosubmit(suggestion){
@@ -395,6 +546,10 @@ export default {
 			    }
             }
         }
-    }
+    },
+
+     created: function(){
+       this.submit() 
+    },
 }
 </script>
