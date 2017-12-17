@@ -76,7 +76,6 @@
                     <!-- Google text normal -->
                         <div v-if="r.type == 'simple_response'" class="bubble gb">
                             {{r.displayText}}
-                            {{r.textToSpeech}}
                         </div>
 
                         <!-- Bot message types / Card -->
@@ -166,9 +165,10 @@
 
     
     <section id="latera-informatin">
-            <div class="avatar-circle-content"><img src="../img/avatar-circle-ada.png" alt="" id="avatar-cirlce"></div>
-            <h1 class="color-text">Hola 👋</h1>
-            <p class="color-text">😄Soy Ada, un gusto conocerte estoy realmente feliz de ayudarte a conocer el Curso de yoga para principiantes</p>
+        <div class="avatar-circle-content"><img src="../img/avatar-circle-ada.png" alt="" id="avatar-cirlce"></div>
+        <h1 class="color-text">Hola 👋</h1>
+        <p class="color-text">😄Soy Ada, un gusto conocerte estoy realmente feliz de ayudarte a conocer el Curso de yoga para principiantes</p>
+        <router-view></router-view>
     </section>
 </section>
 </template>
@@ -505,7 +505,6 @@ export default {
             online: navigator.onLine,
         }
     },
-
     methods: {
         submit(){
             client.textRequest(this.query).then((response) => {
