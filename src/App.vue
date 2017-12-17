@@ -73,6 +73,12 @@
                     <!-- Google Assistant output -->
                     <div v-for="r in a.result.fulfillment.messages">
 
+                    <!-- Google text normal -->
+                        <div v-if="r.type == 'simple_response'" class="bubble gb">
+                            {{r.displayText}}
+                            {{r.textToSpeech}}
+                        </div>
+
                         <!-- Bot message types / Card -->
 
                         <div class="mdc-card" v-if="r.type == 'basic_card'">
@@ -231,6 +237,7 @@ body
     flex-direction: row
     padding-bottom: 0
     bottom: 0
+    margin-bottom: 0
 
     
 .img-avatar
@@ -299,6 +306,13 @@ body
     float: right
     box-shadow: 0 1px 3px rgba(0,0,0,0.12)
     
+.gb
+    background-color: #a4addf;
+    float: left;
+    margin-right: 10px
+    margin-left: -34px
+    border: none
+    margin-bottom: 10px;
 
 #your-m:before 
     content: "Tú"
@@ -324,6 +338,9 @@ body
     margin-right: 10px
     margin-left: -34px
     border: none
+
+div
+    display: inline-block;
 
 td
     margin-top: 30px
