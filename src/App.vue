@@ -166,8 +166,6 @@
     
     <section id="latera-informatin">
         <div class="avatar-circle-content"><img src="../img/avatar-circle-ada.png" alt="" id="avatar-cirlce"></div>
-        <h1 class="color-text">Hola 👋</h1>
-        <p class="color-text">😄Soy Ada, un gusto conocerte estoy realmente feliz de ayudarte a conocer el Curso de yoga para principiantes</p>
         <router-view></router-view>
     </section>
 </section>
@@ -516,8 +514,15 @@ export default {
                 
                 var b = document.body.scrollHeight;
                 var a = response.result;
-                window.scrollTo(0, b) //<- Uncomment this if you want autoscroll
+                window.scrollTo(0, b); //<- Uncomment this if you want autoscroll
                 console.log(a, b);
+
+                //<- change segun url el contenido dinamico
+                
+                var meta = response.result.metadata.intentId
+                if( meta == '522bc789-20e3-4b3f-a7a4-ca9aef0e7909'){
+                    window.location.hash = "#/beneficios"
+                };
                 
             })
         },
